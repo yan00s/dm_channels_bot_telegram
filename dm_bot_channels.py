@@ -261,7 +261,8 @@ class dm_bot(TelegramClient):
         except ValueError:
           return await self.send_message(peerid, "input valide peerid")
         req = "DELETE FROM admins WHERE peer_id = ?"
-        if self.send_req_bd(req, [peerid_dell]):
+        req1 = "DELETE FROM channels WHERE peer_id_tg = ?"
+        if self.send_req_bd(req1, [peerid_dell]) and self.send_req_bd(req, [peerid_dell]):
           text = "SUCCESS delete admin peerid from database"
         else:
           text = "NOT success delete admin peerid from database"
